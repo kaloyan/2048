@@ -2,6 +2,14 @@ import Grid from "./Grid.js";
 import Tile from "./Tile.js";
 
 const gameBoard = document.querySelector("#game-board");
+const allowedKeys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+const actions = {
+  ArrowUp: moveUp,
+  ArrowDown: moveDown,
+  ArrowLeft: moveLeft,
+  ArrowRight: moveRight,
+};
 
 const grid = new Grid(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
@@ -14,69 +22,60 @@ function setupInput() {
 }
 
 async function handleInput(event) {
-  switch (event.key) {
-    case "ArrowUp":
-      if (!canMoveUp()) {
-        setupInput();
-        return;
-      }
-      await moveUp();
-      break;
-    case "ArrowDown":
-      if (!canMoveDown()) {
-        setupInput();
-        return;
-      }
-      await moveDown();
-      break;
-    case "ArrowLeft":
-      if (!canMoveLeft()) {
-        setupInput();
-        return;
-      }
-      await moveLeft();
-      break;
-    case "ArrowRight":
-      if (!canMoveRight()) {
-        setupInput();
-        return;
-      }
-      await moveRight();
-      break;
-    default:
-      setupInput();
-      break;
+  if (!allowedKeys.includes(event.key)) {
+    setupInput();
+    return;
   }
+
+  // If you cant move in any direction - the game ands
+  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+    alert("You lose!");
+    return;
+  }
+
+  const action = actions[event.key]();
+  if (!action) return;
 
   grid.cells.forEach((cell) => {
     return cell.mergeTiles();
   });
 
+  // Create and insert new tile
   const newTile = new Tile(gameBoard);
   grid.randomEmptyCell().tile = newTile;
 
-  if (!canMoveUp && !canMoveDown && !canMoveLeft && !canMoveRight) {
-    newTile.waitForTransition(true).then(() => {
-      alert("You lose!");
-    });
-  } else {
-    setupInput();
-  }
+  setupInput();
 }
 
 function moveUp() {
+  if (!canMoveUp()) {
+    setupInput();
+    return false;
+  }
   return slideTiles(grid.cellsByColimn);
 }
 
 function moveDown() {
+  if (!canMoveDown()) {
+    setupInput();
+    return false;
+  }
   return slideTiles(grid.cellsByColimn.map((column) => [...column].reverse()));
 }
 
 function moveLeft() {
+  if (!canMoveLeft()) {
+    setupInput();
+    return false;
+  }
   return slideTiles(grid.cellsByRow);
 }
 
 function moveRight() {
+  if (!canMoveRight()) {
+    setupInput();
+    return false;
+  }
   return slideTiles(grid.cellsByRow.map((row) => [...row].reverse()));
 }
 
