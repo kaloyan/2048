@@ -45,7 +45,7 @@ body {
   align-items: center;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-color: red;
+  /* background-color: red; */
   border-radius: 1vmin;
   font-weight: bold;
   background-color: hsl(200, 50%, var(--background-lightness));
@@ -53,7 +53,7 @@ body {
   top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
   left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
   animation: show 200ms ease-in-out;
-  transition: 100mx ease-in-out;
+  transition: 100ms ease-in-out;
 }
 
 @keyframes show {

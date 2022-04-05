@@ -22,6 +22,10 @@ export default class Tile {
     this.#tileElement.style.setProperty("--y", value);
   }
 
+  get value() {
+    return this.#value;
+  }
+
   set value(v) {
     this.#value = v;
     this.#tileElement.textContent = v;
@@ -38,5 +42,22 @@ export default class Tile {
       "--text-lightness",
       `${backgroundLightness <= 50 ? 90 : 10}%`
     );
+  }
+
+  remove() {
+    this.#tileElement.remove();
+  }
+
+  waitForTransition(animation = false) {
+    return new Promise((resolve, reject) => {
+      // console.log(this);
+      this.#tileElement.addEventListener(
+        animation ? "animationend" : "transitionend",
+        resolve,
+        {
+          once: true,
+        }
+      );
+    });
   }
 }
