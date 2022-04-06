@@ -12,13 +12,13 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  font-size: 7.5vmin;
+  font-size: 5.5vmin;
 }
 
 #game-board {
-  --grid-size: 4;
-  --cell-size: 20vmin;
-  --cell-gap: 2vmin;
+  /* --grid-size: 4;
+  --cell-size: 10vmin;
+  --cell-gap: 2vmin; */
   display: grid;
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
@@ -27,6 +27,14 @@ body {
   padding: var(--cell-gap);
   border-radius: 1vmin;
   position: relative;
+}
+
+#score-board {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: chartreuse;
+  font-size: 0.5em;
 }
 
 .cell {

@@ -1,5 +1,6 @@
 import Grid from "./Grid.js";
 import Tile from "./Tile.js";
+import { updateScore } from "./utils.js";
 
 const gameBoard = document.querySelector("#game-board");
 const allowedKeys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
@@ -33,12 +34,15 @@ async function handleInput(event) {
     return;
   }
 
-  const action = actions[event.key]();
+  const action = await actions[event.key]();
   if (!action) return;
 
   grid.cells.forEach((cell) => {
     return cell.mergeTiles();
   });
+
+  const score = grid.getMaxCell();
+  updateScore(score);
 
   // Create and insert new tile
   const newTile = new Tile(gameBoard);

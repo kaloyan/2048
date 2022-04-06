@@ -1,6 +1,6 @@
 const GRID_SIZE = 4;
-const CELL_SIZE = 20;
-const CELL_GAP = 2;
+const CELL_SIZE = 15;
+const CELL_GAP = 1.5;
 
 export default class Grid {
   #cells;
@@ -43,6 +43,13 @@ export default class Grid {
       cellGrid[cell.y][cell.x] = cell;
       return cellGrid;
     }, []);
+  }
+
+  getMaxCell() {
+    const arr = this.#cells.map((cell) => (cell.tile ? cell.tile.value : 0));
+    const max = Math.max(...arr);
+
+    return max;
   }
 }
 
