@@ -5,6 +5,8 @@ import { updateScore } from "./utils.js";
 const gameBoard = document.querySelector("#game-board");
 const allowedKeys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
+let grid = null;
+
 const actions = {
   ArrowUp: moveUp,
   ArrowDown: moveDown,
@@ -12,11 +14,7 @@ const actions = {
   ArrowRight: moveRight,
 };
 
-const grid = new Grid(gameBoard);
-grid.randomEmptyCell().tile = new Tile(gameBoard);
-grid.randomEmptyCell().tile = new Tile(gameBoard);
-
-setupInput();
+startGame();
 
 function setupInput() {
   window.addEventListener("keydown", handleInput, { once: true });
@@ -145,4 +143,21 @@ function canMove(cells) {
       return moveToCell.canAccept(cell.tile);
     });
   });
+}
+
+function startGame() {
+  grid = new Grid(gameBoard);
+  grid.randomEmptyCell().tile = new Tile(gameBoard);
+  grid.randomEmptyCell().tile = new Tile(gameBoard);
+
+  setupInput();
+}
+
+const restartBtn = document.querySelector("header button");
+restartBtn.addEventListener("click", restartGame);
+
+function restartGame() {
+  gameBoard.replaceChildren("");
+  updateScore(0);
+  startGame();
 }
