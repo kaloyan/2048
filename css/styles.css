@@ -6,10 +6,7 @@
 }
 
 body {
-  background-color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #faf8ef;
   height: 100vh;
   margin: 0;
   font-size: 5.5vmin;
@@ -29,12 +26,36 @@ body {
   position: relative;
 }
 
-#score-board {
-  position: absolute;
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  /* position: absolute; */
+  padding: 30px;
+  width: 100vw;
   top: 10px;
   left: 10px;
-  color: chartreuse;
+  color: #8f7a66;
   font-size: 0.5em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+button {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: 8px solid #8f7a66;
+  border-radius: 4px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+header #title {
+  font-size: 1.8em;
 }
 
 .cell {
@@ -69,4 +90,12 @@ body {
     opacity: 0.5;
     transform: scale(0);
   }
+}
+
+footer {
+  text-align: center;
+  font-size: 0.5em;
+  position: relative;
+  margin-top: 50px;
+  width: auto;
 }

@@ -4,12 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/img/favicon.ico" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/app.js" type="module"></script>
     <title>2048</title>
   </head>
   <body>
-    <div id="score-board">Max Score: <span id="score"></span></div>
-    <div id="game-board"></div>
+    <header>
+      <div id="title">Play 2048</div>
+      <div id="score-board">Score: <span id="score">0</span></div>
+      <div>
+        <button>Restart</button>
+      </div>
+    </header>
+    <section id="game">
+      <div id="game-board"></div>
+    </section>
+    <section id="info"></section>
+    <footer>
+      <a href="https://github.com/kaloyan/2048" target="_blank"
+        >Source Code (Github)</a
+      >
+    </footer>
   </body>
 </html>
